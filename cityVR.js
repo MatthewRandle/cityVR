@@ -40,7 +40,7 @@ function getRandomSpeed(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-var speed = 0.15; // default car speed
+var speed = 0.1; // default car speed
 
 let car;
 

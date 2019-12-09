@@ -144,7 +144,7 @@ floor.receiveShadow = true;
 scene.add(floor);
 
 // road
-var textureroad = new THREE.TextureLoader().load('https://i.imgur.com/FkdVt4F.jpg');
+var textureroad = new THREE.TextureLoader().load('https://i.imgur.com/OSVwc8q.jpg');
 textureroad.wrapS = THREE.RepeatWrapping;
 textureroad.wrapT = THREE.RepeatWrapping;
 textureroad.repeat.set(1, 1);
