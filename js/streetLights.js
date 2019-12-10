@@ -49,11 +49,11 @@ function createStreetLights(object) {
 
 function createStreetSpotLight() {
     let spotLight = new THREE.SpotLight(0x9ca6c1);
-    spotLight.position.set(-0.45, 2.3, 0);
+    spotLight.position.set(-0.45, 2.75, 0);
     spotLight.target.position.set(-0.45, 0, 0);
     spotLight.castShadow = true;
     spotLight.distance = 9;
-    spotLight.intensity = 3;
+    spotLight.intensity = 4;
     spotLight.penumbra = 1;
     spotLight.angle = 0.5;
     spotLight.shadowMapWidth = 1024; // default is 512

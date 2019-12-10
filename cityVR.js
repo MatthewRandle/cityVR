@@ -23,6 +23,10 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMapping;
 var lightAmbient = new THREE.AmbientLight( 0x2e334e, 0.5 ); 
 scene.add(lightAmbient);
 
+let directionalLight = new THREE.DirectionalLight(0xffeedd, 0.05);
+directionalLight.position.set(0, 0, 1);
+scene.add(directionalLight);
+
 /* TEMP */
 // Add the spot light
 /* var lightThis = new THREE.SpotLight(0x232b8e);

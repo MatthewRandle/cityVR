@@ -32,7 +32,7 @@ carMatLoader.load("models/car.mtl", materials => {
             car.add(backRightLight);
             car.add(backLeftLight);
 
-            car.position.set(8, -0.35, -10)
+            car.position.set(8, -0.4, -10)
             //car.position.set(2, -0.35, 0)
 
             scene.add(car);
