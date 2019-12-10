@@ -20,19 +20,19 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMapping;
 
 // Add the ambient light
-var lightAmbient = new THREE.AmbientLight( 0x2e334e, 0.3 ); 
+var lightAmbient = new THREE.AmbientLight( 0x2e334e, 0.6 ); 
 scene.add(lightAmbient);
 
 /* TEMP */
 // Add the spot light
-var lightThis = new THREE.SpotLight(0x232b8e);
+/* var lightThis = new THREE.SpotLight(0x232b8e);
 lightThis.position.x = 0;
 lightThis.position.y = 15;
 lightThis.position.z = 0;
 lightThis.intensity = 1.0;
 lightThis.penumbra = 0.50;
 lightThis.angle = Math.PI/6;
-scene.add(lightThis);
+scene.add(lightThis); */
 
 var iFrame = 0;
 
@@ -40,7 +40,7 @@ function getRandomSpeed(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-var speed = 0.1; // default car speed
+var speed = 0.05; // default car speed
 
 let car;
 
@@ -55,7 +55,7 @@ function animatecar(){
         if (car.position.z >= carTargetPosition) {
             scene.remove( car );
             car.position.z = carStartPosition;
-            speed = getRandomSpeed(0.15,0.3); // random car speed
+            speed = getRandomSpeed(0.05,0.1); // random car speed
             scene.add( car );
         }
     }

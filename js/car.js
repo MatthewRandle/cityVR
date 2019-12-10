@@ -15,9 +15,9 @@ carMatLoader.load("models/car.mtl", materials => {
                 }
             });
 
-            object.scale.x = 0.002;
-            object.scale.y = 0.002;
-            object.scale.z = 0.002;
+            object.scale.x = 0.0017;
+            object.scale.y = 0.0017;
+            object.scale.z = 0.0017;
             object.position.set(8, -0.35, 0);
             object.castShadow = true;
             car = object;
