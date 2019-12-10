@@ -1,12 +1,14 @@
 var scene = new THREE.Scene();
 
-var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 ); // Perspective projection parameters
+var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 ); // Perspective projection parameters
 camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 1;
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight); // Size of the 2D projection
+scene.fog = new THREE.FogExp2(0x060913, 0.002);
+renderer.setClearColor(scene.fog.color);
 document.body.appendChild(renderer.domElement); // Connecting to the canvas
 
 var controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -22,10 +24,6 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMapping;
 // Add the ambient light
 var lightAmbient = new THREE.AmbientLight( 0x2e334e, 0.5 ); 
 scene.add(lightAmbient);
-
-let directionalLight = new THREE.DirectionalLight(0xffeedd, 0.05);
-directionalLight.position.set(0, 0, 1);
-scene.add(directionalLight);
 
 /* TEMP */
 // Add the spot light
@@ -47,6 +45,7 @@ function getRandomSpeed(min, max) {
 var speed = 0.05; // default car speed
 
 let car;
+let flash;
 
 function animatecar(){
     var carStartPosition = -10;
@@ -65,11 +64,31 @@ function animatecar(){
     }
 }
 
+function animateClouds() {
+    if(!clouds) return;
+    if (!flash) return;
+
+    clouds.forEach(p => {
+        p.rotation.z -= 0.002;
+    });
+
+    if (Math.random() > 0.93 || flash.power > 100) {
+        if (flash.power < 100)
+            flash.position.set(
+                Math.random() * 400,
+                300 + Math.random() * 200,
+                100
+            );
+        flash.power = 50 + Math.random() * 500;
+    }
+}
+
 function animate() {
     requestAnimationFrame(animate);
     iFrame ++;
     controls.update();
     animatecar();
+    animateClouds();
     renderer.render(scene, camera);
 }
 animate();
