@@ -20,7 +20,7 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMapping;
 
 // Add the ambient light
-var lightAmbient = new THREE.AmbientLight( 0x2e334e, 0.6 ); 
+var lightAmbient = new THREE.AmbientLight( 0x2e334e, 0.5 ); 
 scene.add(lightAmbient);
 
 /* TEMP */
@@ -55,7 +55,7 @@ function animatecar(){
         if (car.position.z >= carTargetPosition) {
             scene.remove( car );
             car.position.z = carStartPosition;
-            speed = getRandomSpeed(0.05,0.1); // random car speed
+            speed = getRandomSpeed(0.05, 0.1); // random car speed
             scene.add( car );
         }
     }

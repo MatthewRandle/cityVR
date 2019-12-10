@@ -26,15 +26,13 @@ Kd 0.308270663023 0.308270663023 0.308270663023
 illum 7
 
 newmtl Mat.2
-Ka 1 1 1
+Ka 0.9323308467865 0 0
 Kd 0.9323308467865 0 0
 illum 7
 
-newmtl Mat.4
+newmtl Lights
 Ka 1 1 1
 Kd 1 1 1
-Ks 1 1 1
-Ns 50
 illum 7
 
 newmtl Mat.5
