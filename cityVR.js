@@ -1,21 +1,27 @@
 var scene = new THREE.Scene();
 
-var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 ); // Perspective projection parameters
+var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, 0.1, 2000 ); // Perspective projection parameters
 camera.position.x = 0;
-camera.position.y = 0;
+camera.position.y = 0.8;
 camera.position.z = 1;
 
 var renderer = new THREE.WebGLRenderer();
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight); // Size of the 2D projection
 scene.fog = new THREE.FogExp2(0x060913, 0.002);
 renderer.setClearColor(scene.fog.color);
 document.body.appendChild(renderer.domElement); // Connecting to the canvas
 
-var controls = new THREE.OrbitControls( camera, renderer.domElement );
+/* var controls = new THREE.OrbitControls( camera, renderer.domElement );
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
-controls.position0.clientY = 1;
+controls.position0.clientY = 1; */
+
+var controls = new THREE.DeviceOrientationControls(camera);
+
+var effect = new THREE.StereoEffect(renderer);
+effect.setSize(window.innerWidth, window.innerHeight);
 
 // shadow
 renderer.shadowMap.enabled = true;
@@ -112,7 +118,7 @@ function animate() {
     animateVehicles();
     animateSky();
     animateRain();
-    renderer.render(scene, camera);
+    effect.render(scene, camera);
 }
 
 animate();
