@@ -96,12 +96,26 @@ function animateVehicles() {
     }
 }
 
+function animateRain() {
+  rainGeo.vertices.forEach(p => {
+    p.velocity -= .05*Math.random()*.05;
+    p.y += p.velocity;
+    if(p.y < -10){
+      p.y = 30;
+      p.velocity = -.1;
+    }
+  })
+  rainGeo.verticesNeedUpdate = true;
+  rain.rotation.y += 0.002;
+}
+
 function animate() {
     requestAnimationFrame(animate);
     iFrame ++;
     controls.update();
     animateVehicles();
     animateSky();
+    animateRain();
     renderer.render(scene, camera);
 }
 animate();
