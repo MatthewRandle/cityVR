@@ -77,17 +77,7 @@ function createBackLightCar(position) {
     let lightGeometry = new THREE.BoxGeometry(0.12, 0.03, 0.02);
     let lightMesh = new THREE.Mesh(lightGeometry, redGlow);
 
-    let lightSpotLight = new THREE.SpotLight(0x9ca6c1);
-    lightSpotLight.position.set(0, 0, 0);
-    lightSpotLight.target.position.set(0, -0.5, 5);
-    lightSpotLight.castShadow = true;
-    lightSpotLight.distance = 5;
-    lightSpotLight.intensity = 5;
-    lightSpotLight.penumbra = 1;
-    lightSpotLight.angle = 0.35;
-
     let light = new THREE.Group();
-    light.add(lightSpotLight, lightSpotLight.target);
     light.add(lightMesh);
 
     if (position === "right") light.position.set(-0.275, 0.098, -0.63);

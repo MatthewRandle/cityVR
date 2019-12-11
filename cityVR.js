@@ -22,7 +22,7 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMapping;
 
 // Add the ambient light
-var lightAmbient = new THREE.AmbientLight( 0x2e334e, 0.1 ); 
+var lightAmbient = new THREE.AmbientLight( 0x2e334e, 0.2 ); 
 scene.add(lightAmbient);
 
 var iFrame = 0;
@@ -62,7 +62,7 @@ function animateVehicles() {
 
     //if we haven't chosen a vehicle yet, chose one 
     if(!currentVehicle) {
-        let randomVehicle = Math.floor((Math.random() * 2) + 1) - 1; //random number between 0 and 1
+        let randomVehicle = Math.floor((Math.random() * 3) + 1) - 1; //random number between 0 and 2
         currentVehicle = vehicles[randomVehicle];
 
         //find mesh for the body and add a random color to it
@@ -91,7 +91,7 @@ function animateVehicles() {
             scene.remove(currentVehicle);
             currentVehicle.position.z = vehicleStartPosition;
             currentVehicle = null;
-            vehicleSpeed = getRandomSpeed(0.05, 0.1); // random car speed
+            vehicleSpeed = getRandomSpeed(0.075, 0.1); // random car speed
         }
     }
 }

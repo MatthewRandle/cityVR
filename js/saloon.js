@@ -1,12 +1,12 @@
-let vanLoader = new THREE.OBJLoader();
-let vanMatLoader = new THREE.MTLLoader();
+let saloonLoader = new THREE.OBJLoader();
+let saloonMatLoader = new THREE.MTLLoader();
 
-vanMatLoader.load("models/van.mtl", materials => {
-    materials.preload();
-
-    vanLoader.setMaterials(materials);
-    vanLoader.load(
-        "models/van.obj",
+saloonMatLoader.load("models/saloon.mtl", materials => {
+    materials.preload();    
+    
+    saloonLoader.setMaterials(materials);
+    saloonLoader.load(
+        "models/saloon.obj",
         object => {
             object.traverse(node => {                
                 if(node instanceof THREE.Mesh) {
@@ -20,32 +20,32 @@ vanMatLoader.load("models/van.mtl", materials => {
             object.scale.z = 0.0017;
             object.castShadow = true;
 
-            const frontRightLight = createFrontLightVan("right");
-            const frontLeftLight = createFrontLightVan("left");
-            const backRightLight = createBackLightVan("right");
-            const backLeftLight = createBackLightVan("left");     
+            const frontRightLight = createFrontLightSaloon("right");
+            const frontLeftLight = createFrontLightSaloon("left");
+            const backRightLight = createBackLightSaloon("right");
+            const backLeftLight = createBackLightSaloon("left");     
             
-            van = new THREE.Group();
-            van.add(object);
-            van.add(frontRightLight);
-            van.add(frontLeftLight);
-            van.add(backRightLight);
-            van.add(backLeftLight);
-            
-            van.position.set(9, 0.02, -7)
+            saloon = new THREE.Group();
+            saloon.add(object);
+            saloon.add(frontRightLight);
+            saloon.add(frontLeftLight);
+            saloon.add(backRightLight);
+            saloon.add(backLeftLight);
 
-            vehicles.push(van);
+            saloon.position.set(8, -0.2, -7)
+
+            vehicles.push(saloon);
         }
     )
 });
 
-function createFrontLightVan(position) {
+function createFrontLightSaloon(position) {
     var whiteGlow = new THREE.MeshLambertMaterial({
         color: 0xff0000,
         emissive: 0xffffff
     });
 
-    let lightGeometry = new THREE.BoxGeometry(0.25, 0.05, 0.02);
+    let lightGeometry = new THREE.BoxGeometry(0.161, 0.03, 0.02);
     let lightMesh = new THREE.Mesh(lightGeometry, whiteGlow);
 
     let lightSpotLight = new THREE.SpotLight(0x9ca6c1);
@@ -61,26 +61,27 @@ function createFrontLightVan(position) {
     light.add(lightSpotLight, lightSpotLight.target);
     light.add(lightMesh);
 
-    if (position === "right") light.position.set(-0.4, -0.05, 1.1);
-    else light.position.set(0.3, -0.05, 1.1);    
+    if (position === "right") light.position.set(-0.215, 0, 0.89);
+    else light.position.set(0.215, 0, 0.89);
+    
 
     return light;
 }
 
-function createBackLightVan(position) {
+function createBackLightSaloon(position) {
     var redGlow = new THREE.MeshLambertMaterial({
         color: 0xff0000,
         emissive: 0xd81010
     });
 
-    let lightGeometry = new THREE.BoxGeometry(0.25, 0.05, 0.02);
+    let lightGeometry = new THREE.BoxGeometry(0.12, 0.03, 0.02);
     let lightMesh = new THREE.Mesh(lightGeometry, redGlow);
 
     let light = new THREE.Group();
     light.add(lightMesh);
 
-    if (position === "right") light.position.set(-0.4, 0, -0.96);
-    else light.position.set(0.3, 0, -0.96);
+    if (position === "right") light.position.set(-0.215, -0.01, -0.82);
+    else light.position.set(0.215, -0.01, -0.82);
 
     return light;
 }
