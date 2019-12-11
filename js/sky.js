@@ -28,4 +28,37 @@ loader.load("textures/cloud.png", function (texture) {
 
 flash = new THREE.PointLight(0x062d89, 1, 400, 1.7);
 flash.position.set(0, 300, 0);
+
 scene.add(flash);
+
+// Rain Drop Texture
+
+var textureRain = new THREE.TextureLoader().load('https://i.imgur.com/F2akTrL.png');
+textureRain.wrapS = THREE.RepeatWrapping;
+textureRain.wrapT = THREE.RepeatWrapping;
+textureRain.repeat.set(1, 1);
+
+
+rainCount = 3000;
+
+rainGeo = new THREE.Geometry();
+for (let i = 0; i < rainCount; i++) {
+    rainDrop = new THREE.Vector3(
+        Math.random() * 40 - 20,
+        Math.random() * 500 - 250,
+        Math.random() * 40 - 20
+    )
+    rainDrop.velocity = {};
+    rainDrop.velocity = 0;
+    rainGeo.vertices.push(rainDrop);
+}
+
+rainMaterial = new THREE.PointsMaterial({
+    map: textureRain,
+    //color: 0x1d3876,
+    size: .08,
+    transparent: true
+})
+
+rain = new THREE.Points(rainGeo, rainMaterial);
+scene.add(rain);

@@ -26,7 +26,7 @@ saloonMatLoader.load("models/saloon.mtl", materials => {
             const backLeftLight = createBackLightSaloon("left");     
             
             saloon = new THREE.Group();
-            saloon.add(object);
+            saloon.add(object); //the object has to be the first thing in the group
             saloon.add(frontRightLight);
             saloon.add(frontLeftLight);
             saloon.add(backRightLight);

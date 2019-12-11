@@ -26,7 +26,7 @@ vanMatLoader.load("models/van.mtl", materials => {
             const backLeftLight = createBackLightVan("left");     
             
             van = new THREE.Group();
-            van.add(object);
+            van.add(object); //the object has to be the first thing in the group
             van.add(frontRightLight);
             van.add(frontLeftLight);
             van.add(backRightLight);

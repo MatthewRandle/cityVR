@@ -65,22 +65,18 @@ function animateVehicles() {
         let randomVehicle = Math.floor((Math.random() * 3) + 1) - 1; //random number between 0 and 2
         currentVehicle = vehicles[randomVehicle];
 
-        //find mesh for the body and add a random color to it
-        currentVehicle.traverse(child => {
-            if(child instanceof THREE.Mesh) {
-                if(child.name === "Body" && child.material.length && Array.isArray(child.material)) {
-                    let color = new THREE.Color(0xffffff);
-                    color.setHex(Math.random() * 0xffffff);
-                    
-                    for(let i = 0; i < child.material.length; i++) {
-                        if(child.material[i].name === "Body") {
-                            child.material[i].color = color;
-                            i = child.material.length;
-                        }
-                    }
-                }
+        let currentVehicleMesh = vehicles[randomVehicle].children[0]; //get the vehicle mesh group
+        let currentVehicleMaterials = currentVehicleMesh.children[4].material;
+
+        let color = new THREE.Color(0xffffff);
+        color.setHex(Math.random() * 0xffffff);
+
+        for (let i = 0; i < currentVehicleMaterials.length; i++) {
+            if (currentVehicleMaterials[i].name === "Body") {
+                currentVehicleMaterials[i].color = color;
+                i = 10;
             }
-        })
+        }
 
         scene.add(currentVehicle);
     }
@@ -96,12 +92,26 @@ function animateVehicles() {
     }
 }
 
+function animateRain() {
+    rainGeo.vertices.forEach(p => {
+        p.velocity -= .05 * Math.random() * .05;
+        p.y += p.velocity;
+        if (p.y < -10) {
+            p.y = 30;
+            p.velocity = -.1;
+        }
+    })
+    rainGeo.verticesNeedUpdate = true;
+    rain.rotation.y += 0.002;
+}
+
 function animate() {
     requestAnimationFrame(animate);
     iFrame ++;
     controls.update();
     animateVehicles();
     animateSky();
+    animateRain();
     renderer.render(scene, camera);
 }
 animate();

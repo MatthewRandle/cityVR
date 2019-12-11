@@ -26,14 +26,14 @@ carMatLoader.load("models/car.mtl", materials => {
             const backLeftLight = createBackLightCar("left");     
             
             car = new THREE.Group();
-            car.add(object);
+            car.add(object); //the object has to be the first thing in the group
             car.add(frontRightLight);
             car.add(frontLeftLight);
             car.add(backRightLight);
             car.add(backLeftLight);
 
             car.position.set(8, -0.4, -7)
-
+            
             vehicles.push(car);
         }
     )
