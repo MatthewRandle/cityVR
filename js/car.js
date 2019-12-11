@@ -25,7 +25,7 @@ carMatLoader.load("models/car.mtl", materials => {
             const backRightLight = createBackLightCar("right");
             const backLeftLight = createBackLightCar("left");     
             
-            car = new THREE.Group();
+            let car = new THREE.Group();
             car.add(object); //the object has to be the first thing in the group
             car.add(frontRightLight);
             car.add(frontLeftLight);

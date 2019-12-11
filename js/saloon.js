@@ -25,7 +25,7 @@ saloonMatLoader.load("models/saloon.mtl", materials => {
             const backRightLight = createBackLightSaloon("right");
             const backLeftLight = createBackLightSaloon("left");     
             
-            saloon = new THREE.Group();
+            let saloon = new THREE.Group();
             saloon.add(object); //the object has to be the first thing in the group
             saloon.add(frontRightLight);
             saloon.add(frontLeftLight);
@@ -33,7 +33,7 @@ saloonMatLoader.load("models/saloon.mtl", materials => {
             saloon.add(backLeftLight);
 
             saloon.position.set(8, -0.2, -7)
-
+            
             vehicles.push(saloon);
         }
     )

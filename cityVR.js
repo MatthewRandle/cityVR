@@ -33,7 +33,7 @@ function getRandomSpeed(min, max) {
 
 var vehicleSpeed = 0.075; // default car speed
 
-let flash, car, van, clouds, currentVehicle;
+let flash, clouds, currentVehicle;
 let vehicles = [];
 let vehicleStartPosition = -5;
 let vehicleTargetPosition = 5;
@@ -114,4 +114,5 @@ function animate() {
     animateRain();
     renderer.render(scene, camera);
 }
+
 animate();

@@ -25,7 +25,7 @@ vanMatLoader.load("models/van.mtl", materials => {
             const backRightLight = createBackLightVan("right");
             const backLeftLight = createBackLightVan("left");     
             
-            van = new THREE.Group();
+            let van = new THREE.Group();
             van.add(object); //the object has to be the first thing in the group
             van.add(frontRightLight);
             van.add(frontLeftLight);
@@ -33,7 +33,7 @@ vanMatLoader.load("models/van.mtl", materials => {
             van.add(backLeftLight);
             
             van.position.set(9, 0.02, -7)
-
+            
             vehicles.push(van);
         }
     )
