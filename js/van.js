@@ -32,7 +32,7 @@ vanMatLoader.load("models/van.mtl", materials => {
             van.add(backRightLight);
             van.add(backLeftLight);
             
-            van.position.set(8, 0.02, -7)
+            van.position.set(9, 0.02, -7)
 
             vehicles.push(van);
         }
