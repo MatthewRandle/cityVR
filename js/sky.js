@@ -1,6 +1,6 @@
 let loader = new THREE.TextureLoader();
 
-let clouds = [];
+clouds = [];
 
 loader.load("textures/cloud.png", function (texture) {
     cloudGeo = new THREE.PlaneBufferGeometry(500, 500);

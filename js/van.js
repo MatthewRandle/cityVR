@@ -1,18 +1,17 @@
-let carLoader = new THREE.OBJLoader();
-let carMatLoader = new THREE.MTLLoader();
-let carMaterials = [];
+let vanLoader = new THREE.OBJLoader();
+let vanMatLoader = new THREE.MTLLoader();
+let vanMaterials = [];
 
-carMatLoader.load("models/car.mtl", materials => {
+vanMatLoader.load("models/van.mtl", materials => {
     materials.preload();
-    carMaterials.push(materials);
+    vanMaterials.push(materials);
 
-    carMatLoader.load("models/car_blue.mtl", materials => {
+    vanMatLoader.load("models/van_blue.mtl", materials => {
         materials.preload();
-        carMaterials.push(materials);
-    
-        //carLoader.setMaterials(materials);
-        carLoader.load(
-            "models/car.obj",
+        vanMaterials.push(materials);
+
+        vanLoader.load(
+            "models/van.obj",
             object => {
                 object.traverse(node => {                
                     if(node instanceof THREE.Mesh) {
@@ -26,36 +25,34 @@ carMatLoader.load("models/car.mtl", materials => {
                 object.scale.z = 0.0017;
                 object.castShadow = true;
 
-                const frontRightLight = createFrontLightCar("right");
-                const frontLeftLight = createFrontLightCar("left");
-                const backRightLight = createBackLightCar("right");
-                const backLeftLight = createBackLightCar("left");     
+                const frontRightLight = createFrontLightVan("right");
+                const frontLeftLight = createFrontLightVan("left");
+                const backRightLight = createBackLightVan("right");
+                const backLeftLight = createBackLightVan("left");     
                 
-                car = new THREE.Group();
-                car.add(object);
-                car.add(frontRightLight);
-                car.add(frontLeftLight);
-                car.add(backRightLight);
-                car.add(backLeftLight);
+                van = new THREE.Group();
+                van.add(object);
+                van.add(frontRightLight);
+                van.add(frontLeftLight);
+                van.add(backRightLight);
+                van.add(backLeftLight);
+                
+                van.position.set(8, 0.02, -7)
 
-                car.position.set(8, -0.4, -7)
-
-                vehicles.push({ vehicle: car, materials: carMaterials });
-                //car.position.set(2, -0.35, 0)
-
-                scene.add(car);
+                vehicles.push({ vehicle: van, materials: vanMaterials });
+                scene.add(van);
             }
         )
-    })
+    });
 });
 
-function createFrontLightCar(position) {
+function createFrontLightVan(position) {
     var whiteGlow = new THREE.MeshLambertMaterial({
         color: 0xff0000,
         emissive: 0xffffff
     });
 
-    let lightGeometry = new THREE.BoxGeometry(0.161, 0.03, 0.02);
+    let lightGeometry = new THREE.BoxGeometry(0.25, 0.05, 0.02);
     let lightMesh = new THREE.Mesh(lightGeometry, whiteGlow);
 
     let lightSpotLight = new THREE.SpotLight(0x9ca6c1);
@@ -71,20 +68,19 @@ function createFrontLightCar(position) {
     light.add(lightSpotLight, lightSpotLight.target);
     light.add(lightMesh);
 
-    if (position === "right") light.position.set(-0.24, 0.105, 0.63);
-    else light.position.set(0.24, 0.105, 0.63);
-    
+    if (position === "right") light.position.set(-0.4, -0.05, 1.1);
+    else light.position.set(0.3, -0.05, 1.1);    
 
     return light;
 }
 
-function createBackLightCar(position) {
+function createBackLightVan(position) {
     var redGlow = new THREE.MeshLambertMaterial({
         color: 0xff0000,
         emissive: 0xd81010
     });
 
-    let lightGeometry = new THREE.BoxGeometry(0.12, 0.03, 0.02);
+    let lightGeometry = new THREE.BoxGeometry(0.25, 0.05, 0.02);
     let lightMesh = new THREE.Mesh(lightGeometry, redGlow);
 
     let lightSpotLight = new THREE.SpotLight(0x9ca6c1);
@@ -100,8 +96,8 @@ function createBackLightCar(position) {
     light.add(lightSpotLight, lightSpotLight.target);
     light.add(lightMesh);
 
-    if (position === "right") light.position.set(-0.275, 0.098, -0.63);
-    else light.position.set(0.275, 0.098, -0.63);
+    if (position === "right") light.position.set(-0.4, 0, -0.96);
+    else light.position.set(0.3, 0, -0.96);
 
     return light;
 }
