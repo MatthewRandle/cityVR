@@ -6,14 +6,15 @@ loader.load("textures/cloud.png", function (texture) {
     cloudGeo = new THREE.PlaneBufferGeometry(500, 500);
     cloudMaterial = new THREE.MeshLambertMaterial({
         map: texture,
-        transparent: true
+        transparent: true,
+        depthWrite: false
     });
 
-    for (let p = 0; p < 35; p++) {
+    for (let i = 0; i < 50; i++) {
         let cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
         cloud.position.set(
             Math.random() * 1000 - 400,
-            Math.random() + 750,
+            750 - i,
             Math.random() * 1000 - 450
         );
         cloud.rotation.x = 1.16;
@@ -25,6 +26,6 @@ loader.load("textures/cloud.png", function (texture) {
     };
 });
 
-flash = new THREE.PointLight(0x062d89, 0.05, 400, 1.7);
+flash = new THREE.PointLight(0x062d89, 1, 400, 1.7);
 flash.position.set(0, 300, 0);
 scene.add(flash);

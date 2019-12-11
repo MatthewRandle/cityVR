@@ -1,52 +1,42 @@
 let carLoader = new THREE.OBJLoader();
 let carMatLoader = new THREE.MTLLoader();
-let carMaterials = [];
 
 carMatLoader.load("models/car.mtl", materials => {
-    materials.preload();
-    carMaterials.push(materials);
-
-    carMatLoader.load("models/car_blue.mtl", materials => {
-        materials.preload();
-        carMaterials.push(materials);
+    materials.preload();    
     
-        //carLoader.setMaterials(materials);
-        carLoader.load(
-            "models/car.obj",
-            object => {
-                object.traverse(node => {                
-                    if(node instanceof THREE.Mesh) {
-                        node.castShadow = true;
-                        node.receiveShadow = true;
-                    }
-                });        
+    carLoader.setMaterials(materials);
+    carLoader.load(
+        "models/car.obj",
+        object => {
+            object.traverse(node => {                
+                if(node instanceof THREE.Mesh) {
+                    node.castShadow = true;
+                    node.receiveShadow = true;
+                }
+            });        
 
-                object.scale.x = 0.0017;
-                object.scale.y = 0.0017;
-                object.scale.z = 0.0017;
-                object.castShadow = true;
+            object.scale.x = 0.0017;
+            object.scale.y = 0.0017;
+            object.scale.z = 0.0017;
+            object.castShadow = true;
 
-                const frontRightLight = createFrontLightCar("right");
-                const frontLeftLight = createFrontLightCar("left");
-                const backRightLight = createBackLightCar("right");
-                const backLeftLight = createBackLightCar("left");     
-                
-                car = new THREE.Group();
-                car.add(object);
-                car.add(frontRightLight);
-                car.add(frontLeftLight);
-                car.add(backRightLight);
-                car.add(backLeftLight);
+            const frontRightLight = createFrontLightCar("right");
+            const frontLeftLight = createFrontLightCar("left");
+            const backRightLight = createBackLightCar("right");
+            const backLeftLight = createBackLightCar("left");     
+            
+            car = new THREE.Group();
+            car.add(object);
+            car.add(frontRightLight);
+            car.add(frontLeftLight);
+            car.add(backRightLight);
+            car.add(backLeftLight);
 
-                car.position.set(8, -0.4, -7)
+            car.position.set(8, -0.4, -7)
 
-                vehicles.push({ vehicle: car, materials: carMaterials });
-                //car.position.set(2, -0.35, 0)
-
-                scene.add(car);
-            }
-        )
-    })
+            vehicles.push(car);
+        }
+    )
 });
 
 function createFrontLightCar(position) {

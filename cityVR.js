@@ -22,19 +22,8 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMapping;
 
 // Add the ambient light
-var lightAmbient = new THREE.AmbientLight( 0x2e334e, 0.5 ); 
+var lightAmbient = new THREE.AmbientLight( 0x2e334e, 0.1 ); 
 scene.add(lightAmbient);
-
-/* TEMP */
-// Add the spot light
-/* var lightThis = new THREE.SpotLight(0x232b8e);
-lightThis.position.x = 0;
-lightThis.position.y = 15;
-lightThis.position.z = 0;
-lightThis.intensity = 1.0;
-lightThis.penumbra = 0.50;
-lightThis.angle = Math.PI/6;
-scene.add(lightThis); */
 
 var iFrame = 0;
 
@@ -42,28 +31,14 @@ function getRandomSpeed(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-var speed = 0.05; // default car speed
+var vehicleSpeed = 0.05; // default car speed
 
-let flash, car, van, clouds, currentMaterial, currentVehicle;
+let flash, car, van, clouds, currentVehicle;
 let vehicles = [];
 let vehicleStartPosition = -8;
 let vehicleTargetPosition = 8;
 
-function animateCar(){
-    if(!car) return;
-
-    if (car.position.z <= vehicleTargetPosition) {
-        car.position.z += speed; 
-        if (car.position.z >= vehicleTargetPosition) {
-            scene.remove( car );
-            car.position.z = vehicleStartPosition;
-            speed = getRandomSpeed(0.05, 0.1); // random car speed
-            scene.add( car );
-        }
-    }
-}
-
-function animateClouds() {
+function animateSky() {
     if(!clouds) return;
     if (!flash) return;
 
@@ -71,14 +46,14 @@ function animateClouds() {
         p.rotation.z -= 0.002;
     });
 
-    if (Math.random() > 0.93 || flash.power > 100) {
-        if (flash.power < 100)
+    if (Math.random() > 0.9 || flash.power > 1000) {
+        if (flash.power < 1000)
             flash.position.set(
                 Math.random() * 400,
                 300 + Math.random() * 200,
                 100
             );
-        flash.power = 50 + Math.random() * 500;
+        flash.power = 500 + Math.random() * 5000;
     }
 }
 
@@ -86,22 +61,37 @@ function animateVehicles() {
     if(!vehicles.length || !Array.isArray(vehicles)) return;
 
     //if we haven't chosen a vehicle yet, chose one 
-    if(!currentMaterial || !currentVehicle) {
+    if(!currentVehicle) {
         let randomVehicle = Math.floor((Math.random() * 2) + 1) - 1; //random number between 0 and 1
-        let randomMaterial = Math.floor((Math.random() * 2) + 1) - 1; //random number between 0 and 4 (each vehicle has 5 materials)
+        currentVehicle = vehicles[randomVehicle];
 
-        currentVehicle = vehicles[randomVehicle].vehicle;
-        currentMaterial = vehicles[randomVehicle].materials[randomMaterial];
-        console.log(currentVehicle.children[0]);
+        //find mesh for the body and add a random color to it
+        currentVehicle.traverse(child => {
+            if(child instanceof THREE.Mesh) {
+                if(child.name === "Body" && child.material.length && Array.isArray(child.material)) {
+                    let color = new THREE.Color(0xffffff);
+                    color.setHex(Math.random() * 0xffffff);
+                    
+                    for(let i = 0; i < child.material.length; i++) {
+                        if(child.material[i].name === "Body") {
+                            child.material[i].color = color;
+                            i = child.material.length;
+                        }
+                    }
+                }
+            }
+        })
+
         scene.add(currentVehicle);
     }
     else if (currentVehicle.position.z <= vehicleTargetPosition) {
-        currentVehicle.position.z += speed;
+        currentVehicle.position.z += vehicleSpeed;
+
         if (currentVehicle.position.z >= vehicleTargetPosition) {
             scene.remove(currentVehicle);
             currentVehicle.position.z = vehicleStartPosition;
             currentVehicle = null;
-            speed = getRandomSpeed(0.05, 0.1); // random car speed
+            vehicleSpeed = getRandomSpeed(0.05, 0.1); // random car speed
         }
     }
 }
@@ -110,9 +100,8 @@ function animate() {
     requestAnimationFrame(animate);
     iFrame ++;
     controls.update();
-    //animateCar();
     animateVehicles();
-    animateClouds();
+    animateSky();
     renderer.render(scene, camera);
 }
 animate();

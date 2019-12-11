@@ -1,49 +1,42 @@
 let vanLoader = new THREE.OBJLoader();
 let vanMatLoader = new THREE.MTLLoader();
-let vanMaterials = [];
 
 vanMatLoader.load("models/van.mtl", materials => {
     materials.preload();
-    vanMaterials.push(materials);
 
-    vanMatLoader.load("models/van_blue.mtl", materials => {
-        materials.preload();
-        vanMaterials.push(materials);
+    vanLoader.setMaterials(materials);
+    vanLoader.load(
+        "models/van.obj",
+        object => {
+            object.traverse(node => {                
+                if(node instanceof THREE.Mesh) {
+                    node.castShadow = true;
+                    node.receiveShadow = true;
+                }
+            });        
 
-        vanLoader.load(
-            "models/van.obj",
-            object => {
-                object.traverse(node => {                
-                    if(node instanceof THREE.Mesh) {
-                        node.castShadow = true;
-                        node.receiveShadow = true;
-                    }
-                });        
+            object.scale.x = 0.0017;
+            object.scale.y = 0.0017;
+            object.scale.z = 0.0017;
+            object.castShadow = true;
 
-                object.scale.x = 0.0017;
-                object.scale.y = 0.0017;
-                object.scale.z = 0.0017;
-                object.castShadow = true;
+            const frontRightLight = createFrontLightVan("right");
+            const frontLeftLight = createFrontLightVan("left");
+            const backRightLight = createBackLightVan("right");
+            const backLeftLight = createBackLightVan("left");     
+            
+            van = new THREE.Group();
+            van.add(object);
+            van.add(frontRightLight);
+            van.add(frontLeftLight);
+            van.add(backRightLight);
+            van.add(backLeftLight);
+            
+            van.position.set(8, 0.02, -7)
 
-                const frontRightLight = createFrontLightVan("right");
-                const frontLeftLight = createFrontLightVan("left");
-                const backRightLight = createBackLightVan("right");
-                const backLeftLight = createBackLightVan("left");     
-                
-                van = new THREE.Group();
-                van.add(object);
-                van.add(frontRightLight);
-                van.add(frontLeftLight);
-                van.add(backRightLight);
-                van.add(backLeftLight);
-                
-                van.position.set(8, 0.02, -7)
-
-                vehicles.push({ vehicle: van, materials: vanMaterials });
-                scene.add(van);
-            }
-        )
-    });
+            vehicles.push(van);
+        }
+    )
 });
 
 function createFrontLightVan(position) {
