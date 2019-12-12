@@ -12,13 +12,13 @@ scene.fog = new THREE.FogExp2(0x060913, 0.002);
 renderer.setClearColor(scene.fog.color);
 document.body.appendChild(renderer.domElement); // Connecting to the canvas
 
-/* var controls = new THREE.OrbitControls( camera, renderer.domElement );
+var controls = new THREE.OrbitControls( camera, renderer.domElement );
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
-controls.position0.clientY = 1; */
+controls.position0.clientY = 1;
 
-var controls = new THREE.DeviceOrientationControls(camera);
+//var controls = new THREE.DeviceOrientationControls(camera);
 
 var effect = new THREE.StereoEffect(renderer);
 effect.setSize(window.innerWidth, window.innerHeight);
@@ -39,7 +39,7 @@ function getRandomSpeed(min, max) {
 
 var vehicleSpeed = 0.075; // default car speed
 
-let flash, clouds, currentVehicle;
+let flash, clouds, currentVehicle, rainGeo;
 let vehicles = [];
 let vehicleStartPosition = -5;
 let vehicleTargetPosition = 5;
@@ -63,42 +63,9 @@ function animateSky() {
     }
 }
 
-function animateVehicles() {
-    if(!vehicles.length || !Array.isArray(vehicles)) return;
-
-    //if we haven't chosen a vehicle yet, chose one 
-    if(!currentVehicle) {
-        let randomVehicle = Math.floor((Math.random() * 3) + 1) - 1; //random number between 0 and 2
-        currentVehicle = vehicles[randomVehicle];
-
-        let currentVehicleMesh = vehicles[randomVehicle].children[0]; //get the vehicle mesh group
-        let currentVehicleMaterials = currentVehicleMesh.children[4].material;
-
-        let color = new THREE.Color(0xffffff);
-        color.setHex(Math.random() * 0xffffff);
-
-        for (let i = 0; i < currentVehicleMaterials.length; i++) {
-            if (currentVehicleMaterials[i].name === "Body") {
-                currentVehicleMaterials[i].color = color;
-                i = 10;
-            }
-        }
-
-        scene.add(currentVehicle);
-    }
-    else if (currentVehicle.position.z <= vehicleTargetPosition) {
-        currentVehicle.position.z += vehicleSpeed;
-
-        if (currentVehicle.position.z >= vehicleTargetPosition) {
-            scene.remove(currentVehicle);
-            currentVehicle.position.z = vehicleStartPosition;
-            currentVehicle = null;
-            vehicleSpeed = getRandomSpeed(0.075, 0.1); // random car speed
-        }
-    }
-}
-
 function animateRain() {
+    if(!rainGeo) return;
+
     rainGeo.vertices.forEach(p => {
         p.velocity -= .05 * Math.random() * .05;
         p.y += p.velocity;
@@ -115,7 +82,6 @@ function animate() {
     requestAnimationFrame(animate);
     iFrame ++;
     controls.update();
-    animateVehicles();
     animateSky();
     animateRain();
     effect.render(scene, camera);

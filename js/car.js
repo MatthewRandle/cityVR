@@ -19,22 +19,13 @@ carMatLoader.load("models/car.mtl", materials => {
             object.scale.y = 0.0017;
             object.scale.z = 0.0017;
             object.castShadow = true;
-
-            const frontRightLight = createFrontLightCar("right");
-            const frontLeftLight = createFrontLightCar("left");
-            const backRightLight = createBackLightCar("right");
-            const backLeftLight = createBackLightCar("left");     
             
             let car = new THREE.Group();
             car.add(object); //the object has to be the first thing in the group
-            car.add(frontRightLight);
-            car.add(frontLeftLight);
-            car.add(backRightLight);
-            car.add(backLeftLight);
 
-            car.position.set(8, -0.4, -7)
+            car.position.set(10, -0.4, -2)
             
-            vehicles.push(car);
+            scene.add(car);
         }
     )
 });

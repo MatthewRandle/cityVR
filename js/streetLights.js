@@ -30,21 +30,39 @@ streetLightMatLoader.load("models/streetlight.mtl", materials => {
     )
 });
 
+createHiddenLights();
+
 function createStreetLights(object) {
     const spotLight1 = createStreetSpotLight();
     let streetLight1 = new THREE.Group();
     streetLight1.add(object.clone());
     streetLight1.add(spotLight1, spotLight1.target);
-    streetLight1.position.set(11, -0.5, -3);
+    streetLight1.position.set(10.75, -0.5, -3);
 
     const spotLight2 = createStreetSpotLight();
     let streetLight2 = new THREE.Group();
     streetLight2.add(object.clone());
     streetLight2.add(spotLight2, spotLight2.target);
-    streetLight2.position.set(11, -0.5, 3);
+    streetLight2.position.set(10.75, -0.5, 3);
+
+    const spotLight3 = createStreetSpotLight();
+    let streetLight3 = new THREE.Group();
+    streetLight3.add(object.clone());
+    streetLight3.add(spotLight3, spotLight3.target);
+    streetLight3.position.set(-8.75, -0.5, -3);
+    streetLight3.rotation.y = Math.PI / 1;
+
+    const spotLight4 = createStreetSpotLight();
+    let streetLight4 = new THREE.Group();
+    streetLight4.add(object.clone());
+    streetLight4.add(spotLight4, spotLight4.target);
+    streetLight4.position.set(-8.75, -0.5, 3);
+    streetLight4.rotation.y = Math.PI / 1;
     
     scene.add(streetLight1);
     scene.add(streetLight2);
+    scene.add(streetLight3);
+    scene.add(streetLight4);
 }
 
 function createStreetSpotLight() {
@@ -62,30 +80,28 @@ function createStreetSpotLight() {
     return spotLight;
 }
 
-var streetLight3 = new THREE.SpotLight(0x9ca6c1);
-streetLight3.position.set(7, 4, 3);
-streetLight3.target.position.set(7, 0, 3);
-streetLight3.castShadow = true;
-streetLight3.distance = 7;
-streetLight3.intensity = 8;
-streetLight3.penumbra = 1;
-streetLight3.angle = 0.35;
-streetLight3.shadowMapWidth = 1024; // default is 512
-streetLight3.shadowMapHeight = 1024; // default is 512
-scene.add(streetLight3);
-scene.add(streetLight3.target);
+function createHiddenLights() {
+    const hiddenLight1 = createStreetSpotLight();
+    hiddenLight1.position.set(7, 4, 3);
+    hiddenLight1.target.position.set(7, 0, 3);
 
-var streetLight4 = new THREE.SpotLight(0x9ca6c1);
-streetLight4.position.set(7, 4, -3);
-streetLight4.target.position.set(7, 0, -3);
-streetLight4.castShadow = true;
-streetLight4.distance = 7;
-streetLight4.intensity = 8;
-streetLight4.penumbra = 1;
-streetLight4.angle = 0.35;
-streetLight4.shadowMapWidth = 1024; // default is 512
-streetLight4.shadowMapHeight = 1024; // default is 512
-scene.add(streetLight4, streetLight4.target);
+    const hiddenLight2 = createStreetSpotLight();
+    hiddenLight2.position.set(7, 4, -3);
+    hiddenLight2.target.position.set(7, 0, -3);
+
+    const hiddenLight3 = createStreetSpotLight();
+    hiddenLight3.position.set(-6, 4, 3);
+    hiddenLight3.target.position.set(-6, 0, 3);
+
+    const hiddenLight4 = createStreetSpotLight();
+    hiddenLight4.position.set(-6, 4, -3);
+    hiddenLight4.target.position.set(-6, 0, -3);
+
+    scene.add(hiddenLight1, hiddenLight1.target);
+    scene.add(hiddenLight2, hiddenLight2.target);
+    scene.add(hiddenLight3, hiddenLight3.target);
+    scene.add(hiddenLight4, hiddenLight4.target);
+}
 
 //alley lights
 var alleyLight1 = new THREE.SpotLight(0xeb9035);

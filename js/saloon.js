@@ -32,9 +32,9 @@ saloonMatLoader.load("models/saloon.mtl", materials => {
             saloon.add(backRightLight);
             saloon.add(backLeftLight);
 
-            saloon.position.set(8, -0.2, -7)
+            saloon.position.set(-8, -0.2, -2)
             
-            vehicles.push(saloon);
+            scene.add(saloon);
         }
     )
 });

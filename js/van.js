@@ -32,9 +32,10 @@ vanMatLoader.load("models/van.mtl", materials => {
             van.add(backRightLight);
             van.add(backLeftLight);
             
-            van.position.set(9, 0.02, -7)
+            van.position.set(3, 0.02, 1)
+            van.rotation.y = Math.PI / -2;
             
-            vehicles.push(van);
+            scene.add(van);
         }
     )
 });
