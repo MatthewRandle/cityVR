@@ -33,13 +33,9 @@ scene.add(flash);
 
 // Rain Drop Texture
 
-var textureRain = new THREE.TextureLoader().load('https://i.imgur.com/F2akTrL.png');
-textureRain.wrapS = THREE.RepeatWrapping;
-textureRain.wrapT = THREE.RepeatWrapping;
-textureRain.repeat.set(1, 1);
+var textureRain = new THREE.TextureLoader().load('textures/rain.png');
 
-
-rainCount = 3000;
+rainCount = 1000;
 
 rainGeo = new THREE.Geometry();
 for (let i = 0; i < rainCount; i++) {
@@ -56,8 +52,7 @@ for (let i = 0; i < rainCount; i++) {
 rainMaterial = new THREE.PointsMaterial({
     map: textureRain,
     //color: 0x1d3876,
-    size: .08,
-    transparent: true
+    size: .08
 })
 
 rain = new THREE.Points(rainGeo, rainMaterial);

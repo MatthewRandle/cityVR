@@ -52,7 +52,6 @@ function createAlleyLights(object) {
 function createAlleyPointLight() {
     let pointLight = new THREE.PointLight(0x9ca6c1);
     pointLight.position.set(0, 0, 0);
-    pointLight.castShadow = true;
     pointLight.distance = 3;
     pointLight.intensity = 0.5;
 

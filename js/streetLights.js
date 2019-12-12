@@ -33,26 +33,26 @@ streetLightMatLoader.load("models/streetlight.mtl", materials => {
 createHiddenLights();
 
 function createStreetLights(object) {
-    const spotLight1 = createStreetSpotLight(true);
+    const spotLight1 = createStreetSpotLight(false);
     let streetLight1 = new THREE.Group();
     streetLight1.add(object.clone());
     streetLight1.add(spotLight1, spotLight1.target);
     streetLight1.position.set(10.75, -0.5, -3);
 
-    const spotLight2 = createStreetSpotLight(true);
+    const spotLight2 = createStreetSpotLight(false);
     let streetLight2 = new THREE.Group();
     streetLight2.add(object.clone());
     streetLight2.add(spotLight2, spotLight2.target);
     streetLight2.position.set(10.75, -0.5, 3);
 
-    const spotLight3 = createStreetSpotLight(true);
+    const spotLight3 = createStreetSpotLight(false);
     let streetLight3 = new THREE.Group();
     streetLight3.add(object.clone());
     streetLight3.add(spotLight3, spotLight3.target);
     streetLight3.position.set(-8.75, -0.5, -3);
     streetLight3.rotation.y = Math.PI / 1;
 
-    const spotLight4 = createStreetSpotLight(true);
+    const spotLight4 = createStreetSpotLight(false);
     let streetLight4 = new THREE.Group();
     streetLight4.add(object.clone());
     streetLight4.add(spotLight4, spotLight4.target);

@@ -71,7 +71,7 @@ function animateRain() {
     if(!rainGeo) return;
 
     rainGeo.vertices.forEach(p => {
-        p.velocity -= .05 * Math.random() * .05;
+        p.velocity -= .0025;
         p.y += p.velocity;
         if (p.y < -10) {
             p.y = 30;
@@ -79,7 +79,6 @@ function animateRain() {
         }
     })
     rainGeo.verticesNeedUpdate = true;
-    rain.rotation.y += 0.002;
 }
 
 function animate() {
