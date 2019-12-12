@@ -56,13 +56,19 @@ function animateSky() {
         p.rotation.z -= 0.002;
     });
 
-    if (Math.random() > 0.9 || flash.power > 1000) {
-        if (flash.power < 1000)
+    //there is a 35% chance of lightning happening
+    if (Math.random() > 0.65) {
+
+        //move the lighting flash if its below a certain brightness (if we just move it all the time the sky never stops flashing)
+        if (flash.power < 1500) {
             flash.position.set(
                 Math.random() * 400,
                 300 + Math.random() * 200,
                 100
             );
+        }
+            
+        //create a new random flash
         flash.power = 500 + Math.random() * 5000;
     }
 }
