@@ -7,10 +7,12 @@
         <style>
             body { margin: 0; }
             canvas { width: 100%; height: 100%; display: block; }
+            p { position: fixed; background-color: white; left: 10px; padding: 5px; cursor: pointer; user-select: none; }
         </style>
     </head>
 
     <body>
+        <p onclick="toggleControls()">Toggle VR Controls</p>
         <script src="https://threejs.org/build/three.js"></script>
         <script src="js/OBJLoader.js"></script>
         <script src="js/MTLLoader.js"></script>
@@ -18,6 +20,7 @@
         <script src="js/DeviceOrientationControls.js"></script>
         <script src="js/StereoCamera.js"></script>
         <script src="cityVR.js"></script>
+        <script src="js/toggleControls.js"></script>
         <script src="js/streetLights.js"></script>
         <script src="js/alleyLights.js"></script>
         <script src="js/car.js"></script>
