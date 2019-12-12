@@ -52,7 +52,8 @@ for (let i = 0; i < rainCount; i++) {
 rainMaterial = new THREE.PointsMaterial({
     map: textureRain,
     //color: 0x1d3876,
-    size: .08
+    size: .08,
+    opacity: 0.6
 })
 
 rain = new THREE.Points(rainGeo, rainMaterial);
