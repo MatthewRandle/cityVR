@@ -10,8 +10,11 @@ loader.load("textures/cloud.png", function (texture) {
         depthWrite: false
     });
 
+    //create 50 clouds
     for (let i = 0; i < 50; i++) {
         let cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
+
+        //randomize the position of the clouds
         cloud.position.set(
             Math.random() * 1000 - 400,
             750 - i,
@@ -20,8 +23,11 @@ loader.load("textures/cloud.png", function (texture) {
         cloud.rotation.x = 1.16;
         cloud.rotation.y = -0.12;
         cloud.rotation.z = Math.random() * 360;
+
         cloud.material.opacity = 0.6;
+
         clouds.push(cloud);
+
         scene.add(cloud);
     };
 });
@@ -32,12 +38,13 @@ flash.position.set(0, 300, 0);
 scene.add(flash);
 
 // Rain Drop Texture
-
 var textureRain = new THREE.TextureLoader().load('textures/rain.png');
 
 rainCount = 1000;
 
 rainGeo = new THREE.Geometry();
+
+//randomize the position of the rain
 for (let i = 0; i < rainCount; i++) {
     rainDrop = new THREE.Vector3(
         Math.random() * 40 - 20,
@@ -51,7 +58,6 @@ for (let i = 0; i < rainCount; i++) {
 
 rainMaterial = new THREE.PointsMaterial({
     map: textureRain,
-    //color: 0x1d3876,
     size: .08,
     opacity: 0.6
 })

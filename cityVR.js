@@ -1,6 +1,7 @@
 var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, 0.1, 2000 ); // Perspective projection parameters
+//the Y is important to make it normal when viewing in VR
 camera.position.x = 0;
 camera.position.y = 0.55;
 camera.position.z = 1;
@@ -12,8 +13,10 @@ scene.fog = new THREE.FogExp2(0x060913, 0.002);
 renderer.setClearColor(scene.fog.color);
 document.body.appendChild(renderer.domElement); // Connecting to the canvas
 
+//will be changed when toggle button is clicked
 let controls;
 
+//controls used for mouse
 let orbitControls = new THREE.OrbitControls( camera, renderer.domElement );
 orbitControls.enableDamping = true;
 orbitControls.dampingFactor = 0.25;
@@ -52,6 +55,7 @@ function animateSky() {
     if(!clouds) return;
     if (!flash) return;
 
+    //rotate each cloud
     clouds.forEach(p => {
         p.rotation.z -= 0.002;
     });
