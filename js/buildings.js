@@ -20,6 +20,7 @@ var b1 = new THREE.Mesh(geometrySmallBuilding, materialSmallBuilding);
 b1.position.z = -4.2;
 b1.position.x = 4.8;
 b1.position.y = 1.2;
+b1.castShadow = true;
 scene.add(b1);
 
 //Building 2
@@ -35,6 +36,7 @@ var b2 = new THREE.Mesh(geometryMediumBuilding, materialMediumBuilding);
 b2.position.z = -4;
 b2.position.x = -.6;
 b2.position.y = 2.45;
+b2.castShadow = true;
 scene.add(b2);
 
 //Building 3
@@ -49,6 +51,7 @@ var b3 = new THREE.Mesh(geometryMediumBuilding, materialMediumBuilding2);
 b3.position.z = 4;
 b3.position.x = 2.5;
 b3.position.y = 2.45;
+b3.castShadow = true;
 scene.add(b3);
 
 //Building 4
@@ -63,10 +66,14 @@ var b4 = new THREE.Mesh(geometrySmallBuilding, materialSmallBuilding2);
 b4.position.z = 4.2;
 b4.position.x = -3;
 b4.position.y = 1.2;
+b4.castShadow = true;
 scene.add(b4);
 
 //Building 5
 var textureb5 = new THREE.TextureLoader().load('textures/building5.jpg');
+textureb5.wrapS = THREE.RepeatWrapping;
+textureb5.wrapT = THREE.RepeatWrapping;
+textureb5.repeat.set(1.5, 1);
 
 var materialLargeBuilding = new THREE.MeshPhongMaterial({ map: textureb5 });
 
@@ -77,6 +84,9 @@ scene.add(b5);
 
 //Building 6
 var textureb6 = new THREE.TextureLoader().load('textures/building6.jpg');
+textureb6.wrapS = THREE.RepeatWrapping;
+textureb6.wrapT = THREE.RepeatWrapping;
+textureb6.repeat.set(1.5, 1);
 
 var materialLargeBuilding2 = new THREE.MeshPhongMaterial({ map: textureb6 });
 
@@ -87,6 +97,9 @@ scene.add(b6);
 
 //Building 7
 var textureb7 = new THREE.TextureLoader().load('textures/building7.jpg');
+textureb7.wrapS = THREE.RepeatWrapping;
+textureb7.wrapT = THREE.RepeatWrapping;
+textureb7.repeat.set(1, 8);
 
 var materialTallBuilding = new THREE.MeshPhongMaterial({ map: textureb7 });
 
@@ -99,6 +112,9 @@ scene.add(b7);
 // floor, road, pavement
 // floor
 var texturebfloor = new THREE.TextureLoader().load('textures/floor.jpg');
+texturebfloor.wrapS = THREE.RepeatWrapping;
+texturebfloor.wrapT = THREE.RepeatWrapping;
+texturebfloor.repeat.set(50, 50);
 
 var materialfloor = new THREE.MeshPhongMaterial({ map: texturebfloor });
 
@@ -125,6 +141,9 @@ scene.add(road);
 
 //pavement
 var texturepavement = new THREE.TextureLoader().load('textures/pavement.jpg');
+texturepavement.wrapS = THREE.RepeatWrapping;
+texturepavement.wrapT = THREE.RepeatWrapping;
+texturepavement.repeat.set(6, 2.05);
 
 var materialpavement = new THREE.MeshPhongMaterial({
     map: texturepavement,

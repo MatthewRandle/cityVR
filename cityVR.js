@@ -3,7 +3,7 @@ var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, 0.1, 2000 ); // Perspective projection parameters
 camera.position.x = 0;
 camera.position.y = 0.55;
-camera.position.z = 1;
+camera.position.z = 0.1;
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -56,19 +56,13 @@ function animateSky() {
         p.rotation.z -= 0.002;
     });
 
-    //there is a 35% chance of lightning happening
-    if (Math.random() > 0.65) {
-
-        //move the lighting flash if its below a certain brightness (if we just move it all the time the sky never stops flashing)
-        if (flash.power < 1500) {
+    if (Math.random() > 0.9 || flash.power > 1000) {
+        if (flash.power < 1000)
             flash.position.set(
                 Math.random() * 400,
                 300 + Math.random() * 200,
                 100
             );
-        }
-            
-        //create a new random flash
         flash.power = 500 + Math.random() * 5000;
     }
 }

@@ -1,4 +1,4 @@
-var geometryMoon = new THREE.SphereGeometry(2, 50, 10);
+var geometryMoon = new THREE.SphereGeometry(2.4, 50, 10);
 var materialMoon = new THREE.MeshBasicMaterial({color: 0xccc3af});
 
 var moon = new THREE.Mesh(geometryMoon, materialMoon);
