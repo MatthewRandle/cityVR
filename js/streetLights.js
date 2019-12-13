@@ -84,19 +84,19 @@ function createStreetSpotLight(castShadow) {
 
 /* create the lights that aren't not saw - ie we don't need the model */
 function createHiddenLights() {
-    const hiddenLight1 = createStreetSpotLight(false);
+    const hiddenLight1 = createStreetSpotLight(true);
     hiddenLight1.position.set(7, 4, 3);
     hiddenLight1.target.position.set(7, 0, 3);
 
-    const hiddenLight2 = createStreetSpotLight(false);
+    const hiddenLight2 = createStreetSpotLight(true);
     hiddenLight2.position.set(7, 4, -3);
     hiddenLight2.target.position.set(7, 0, -3);
 
-    const hiddenLight3 = createStreetSpotLight(false);
+    const hiddenLight3 = createStreetSpotLight(true);
     hiddenLight3.position.set(-6, 4, 3);
     hiddenLight3.target.position.set(-6, 0, 3);
 
-    const hiddenLight4 = createStreetSpotLight(false);
+    const hiddenLight4 = createStreetSpotLight(true);
     hiddenLight4.position.set(-6, 4, -3);
     hiddenLight4.target.position.set(-6, 0, -3);
 
