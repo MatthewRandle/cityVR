@@ -31,7 +31,7 @@ let VRControls = new THREE.DeviceOrientationControls(camera);
 var effect = new THREE.StereoEffect(renderer);
 effect.setSize(window.innerWidth, window.innerHeight);
 
-// shadow
+// shadow mapping enabled 
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMapping;
 
@@ -76,13 +76,14 @@ function animateRain() {
     if(!rainGeo) return;
 
     rainGeo.vertices.forEach(p => {
-        p.velocity -= .0025;
+        p.velocity -= .0025; // speed of rainfall 
         p.y += p.velocity;
-        if (p.y < -10) {
+        if (p.y < -10) { // if rain has reached the floor move to the sky again 
             p.y = 30;
             p.velocity = -.1;
         }
     })
+    rain.rotation.y += 0.001; // rotate rain, more convincing 
     rainGeo.verticesNeedUpdate = true;
 }
 

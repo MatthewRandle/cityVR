@@ -1,3 +1,4 @@
+// all geometry
 var geometrySmallBuilding = new THREE.BoxGeometry(3, 3.5, 3);
 var geometryMediumBuilding = new THREE.BoxGeometry(8, 6, 3);
 var geometryLargeBuilding = new THREE.BoxGeometry(1, 7, 15);
@@ -13,14 +14,14 @@ var textureb1 = new THREE.TextureLoader().load('textures/building4.jpg');
 
 var materialSmallBuilding = new THREE.MeshPhongMaterial({
     map: textureb1,
-    bumpMap: new THREE.TextureLoader().load('textures/building4bump.jpg')
+    bumpMap: new THREE.TextureLoader().load('textures/building4bump.jpg') // bump mapping, more realistic 
 });
 
 var b1 = new THREE.Mesh(geometrySmallBuilding, materialSmallBuilding);
 b1.position.z = -4.2;
 b1.position.x = 4.8;
 b1.position.y = 1.2;
-b1.castShadow = true;
+b1.castShadow = true; // alow the building to cast a shadow 
 scene.add(b1);
 
 //Building 2
@@ -28,7 +29,7 @@ var textureb2 = new THREE.TextureLoader().load('textures/building2.jpg');
 
 var materialMediumBuilding = new THREE.MeshPhongMaterial({
     map: textureb2,
-    bumpMap: new THREE.TextureLoader().load('textures/building2bump.jpg'),
+    bumpMap: new THREE.TextureLoader().load('textures/building2bump.jpg'), // bump mapping, more realistic 
     shininess: 40
 });
 
@@ -36,7 +37,7 @@ var b2 = new THREE.Mesh(geometryMediumBuilding, materialMediumBuilding);
 b2.position.z = -4;
 b2.position.x = -.6;
 b2.position.y = 2.45;
-b2.castShadow = true;
+b2.castShadow = true; // alow the building to cast a shadow 
 scene.add(b2);
 
 //Building 3
@@ -44,14 +45,14 @@ var textureb3 = new THREE.TextureLoader().load( 'textures/building3.jpg' );
 
 var materialMediumBuilding2 = new THREE.MeshPhongMaterial({ 
   map: textureb3, 
-  bumpMap: new THREE.TextureLoader().load( 'textures/building3bump.jpg' )
+  bumpMap: new THREE.TextureLoader().load( 'textures/building3bump.jpg' ) // bump mapping, more realistic 
 });
 
 var b3 = new THREE.Mesh(geometryMediumBuilding, materialMediumBuilding2);
 b3.position.z = 4;
 b3.position.x = 2.5;
 b3.position.y = 2.45;
-b3.castShadow = true;
+b3.castShadow = true; // alow the building to cast a shadow 
 scene.add(b3);
 
 //Building 4
@@ -59,21 +60,21 @@ var textureb4 = new THREE.TextureLoader().load('textures/building1.jpg');
 
 var materialSmallBuilding2 = new THREE.MeshPhongMaterial({
     map: textureb4,
-    bumpMap: new THREE.TextureLoader().load('textures/building1bump.jpg')
+    bumpMap: new THREE.TextureLoader().load('textures/building1bump.jpg') // bump mapping, more realistic 
 });
 
 var b4 = new THREE.Mesh(geometrySmallBuilding, materialSmallBuilding2);
 b4.position.z = 4.2;
 b4.position.x = -3;
 b4.position.y = 1.2;
-b4.castShadow = true;
+b4.castShadow = true; // alow the building to cast a shadow 
 scene.add(b4);
 
 //Building 5
 var textureb5 = new THREE.TextureLoader().load('textures/building5.jpg');
 textureb5.wrapS = THREE.RepeatWrapping;
 textureb5.wrapT = THREE.RepeatWrapping;
-textureb5.repeat.set(1.5, 1);
+textureb5.repeat.set(1.5, 1); // texture repeat
 
 var materialLargeBuilding = new THREE.MeshPhongMaterial({ map: textureb5 });
 
@@ -86,7 +87,7 @@ scene.add(b5);
 var textureb6 = new THREE.TextureLoader().load('textures/building6.jpg');
 textureb6.wrapS = THREE.RepeatWrapping;
 textureb6.wrapT = THREE.RepeatWrapping;
-textureb6.repeat.set(1.5, 1);
+textureb6.repeat.set(1.5, 1); // texture repeat
 
 var materialLargeBuilding2 = new THREE.MeshPhongMaterial({ map: textureb6 });
 
@@ -99,7 +100,7 @@ scene.add(b6);
 var textureb7 = new THREE.TextureLoader().load('textures/building7.jpg');
 textureb7.wrapS = THREE.RepeatWrapping;
 textureb7.wrapT = THREE.RepeatWrapping;
-textureb7.repeat.set(1, 8);
+textureb7.repeat.set(1, 8); // texture repeat
 
 var materialTallBuilding = new THREE.MeshPhongMaterial({ map: textureb7 });
 
@@ -114,7 +115,7 @@ scene.add(b7);
 var texturebfloor = new THREE.TextureLoader().load('textures/floor.jpg');
 texturebfloor.wrapS = THREE.RepeatWrapping;
 texturebfloor.wrapT = THREE.RepeatWrapping;
-texturebfloor.repeat.set(50, 50);
+texturebfloor.repeat.set(50, 50); // texture repeat
 
 var materialfloor = new THREE.MeshPhongMaterial({ map: texturebfloor });
 
@@ -128,8 +129,8 @@ var textureroad = new THREE.TextureLoader().load('textures/road.jpg');
 
 var materialroad = new THREE.MeshPhongMaterial({
     map: textureroad,
-    bumpMap: new THREE.TextureLoader().load('textures/roadbump.jpg'),
-    shininess: 100
+    bumpMap: new THREE.TextureLoader().load('textures/roadbump.jpg'), // bump mapping, more realistic 
+    shininess: 100 // wet road effect 
 });
 
 var road = new THREE.Mesh(geometryroad, materialroad);
@@ -143,7 +144,7 @@ scene.add(road);
 var texturepavement = new THREE.TextureLoader().load('textures/pavement.jpg');
 texturepavement.wrapS = THREE.RepeatWrapping;
 texturepavement.wrapT = THREE.RepeatWrapping;
-texturepavement.repeat.set(6, 2.05);
+texturepavement.repeat.set(6, 2.05); // texture repeat
 
 var materialpavement = new THREE.MeshPhongMaterial({
     map: texturepavement,
@@ -151,13 +152,14 @@ var materialpavement = new THREE.MeshPhongMaterial({
 });
 
 var pavement = new THREE.Mesh(geometrypavement, materialpavement);
+pavement.receiveShadow = true; // alow shaddow to cast on pavement 
 pavement.position.x = 1;
 pavement.position.z = -2.6;
 pavement.position.y = -.74;
 scene.add(pavement);
 
 var pavement2 = new THREE.Mesh(geometrypavement, materialpavement);
-pavement2.receiveShadow = true;
+pavement2.receiveShadow = true; // alow shaddow to cast on pavement 
 pavement2.position.x = 1;
 pavement2.position.z = 2.6;
 pavement2.position.y = -.74;

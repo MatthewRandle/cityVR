@@ -45,7 +45,7 @@ rainCount = 1000;
 
 rainGeo = new THREE.Geometry();
 
-//randomize the position of the rain
+//randomize the position of the rain partacles within specific area
 for (let i = 0; i < rainCount; i++) {
     rainDrop = new THREE.Vector3(
         Math.random() * 40 - 20,
@@ -57,6 +57,7 @@ for (let i = 0; i < rainCount; i++) {
     rainGeo.vertices.push(rainDrop);
 }
 
+//rain matirial 
 rainMaterial = new THREE.PointsMaterial({
     map: textureRain,
     size: .08,
