@@ -1,6 +1,7 @@
 let alleyLightLoader = new THREE.OBJLoader();
 let alleyLightMatLoader = new THREE.MTLLoader();
 
+//load custom material
 alleyLightMatLoader.load("models/alleylight.mtl", materials => {
     materials.preload();
 
@@ -8,6 +9,7 @@ alleyLightMatLoader.load("models/alleylight.mtl", materials => {
     alleyLightLoader.load(
         "models/alleylight.obj",
         object => {
+            //make each part of the mesh cast and receive shadows
             object.traverse(node => {
                 if (node instanceof THREE.Mesh) {
                     node.castShadow = true;
@@ -15,6 +17,7 @@ alleyLightMatLoader.load("models/alleylight.mtl", materials => {
                 }
             });
 
+            //scale model accordingly
             object.scale.x = 0.0017;
             object.scale.y = 0.0017;
             object.scale.z = 0.0017;
@@ -24,6 +27,7 @@ alleyLightMatLoader.load("models/alleylight.mtl", materials => {
     )
 });
 
+/* Create the alley lights using the mesh */
 function createAlleyLights(object) {
     const pointLight1 = createAlleyPointLight();
     let streetLight1 = new THREE.Group();
@@ -49,6 +53,7 @@ function createAlleyLights(object) {
     scene.add(streetLight3);
 }
 
+/* re-usable point light for alley lights */
 function createAlleyPointLight() {
     let pointLight = new THREE.PointLight(0x9ca6c1);
     pointLight.position.set(0, 0, 0);

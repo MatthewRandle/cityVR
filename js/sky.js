@@ -24,6 +24,7 @@ loader.load("textures/cloud.png", function (texture) {
         cloud.rotation.y = -0.12;
         cloud.rotation.z = Math.random() * 360;
 
+        //make it so you can see clouds behind other clouds
         cloud.material.opacity = 0.6;
 
         clouds.push(cloud);

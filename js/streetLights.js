@@ -2,6 +2,7 @@
 let streetLightLoader = new THREE.OBJLoader();
 let streetLightMatLoader = new THREE.MTLLoader();
 
+//load custom material
 streetLightMatLoader.load("models/streetlight.mtl", materials => {
     materials.preload();
 
@@ -9,6 +10,7 @@ streetLightMatLoader.load("models/streetlight.mtl", materials => {
     streetLightLoader.load(
         "models/streetlight.obj",
         object => {
+            //make each part of the mesh cast and receive shadows
             object.traverse(node => {
                 if (node instanceof THREE.Mesh) {
                     node.castShadow = true;
@@ -16,15 +18,13 @@ streetLightMatLoader.load("models/streetlight.mtl", materials => {
                 }
             });
 
+            //scale model accordingly
             object.scale.x = 0.0017;
             object.scale.y = 0.0017;
             object.scale.z = 0.0017;
             object.castShadow = true;
             object.rotation.y = Math.PI / -2;
 
-            /* let streetLight = new THREE.Group();
-            streetLight.add(object);
-            streetLight.add(spotLight, spotLight.target); */
             createStreetLights(object);
         }
     )
@@ -32,6 +32,7 @@ streetLightMatLoader.load("models/streetlight.mtl", materials => {
 
 createHiddenLights();
 
+/* Create the street lights using the mesh */
 function createStreetLights(object) {
     const spotLight1 = createStreetSpotLight(false);
     let streetLight1 = new THREE.Group();
@@ -65,6 +66,7 @@ function createStreetLights(object) {
     scene.add(streetLight4);
 }
 
+/* re-usable spot light for street lights */
 function createStreetSpotLight(castShadow) {
     let spotLight = new THREE.SpotLight(0x9ca6c1);
     spotLight.position.set(-0.45, 4, 0);
@@ -80,6 +82,7 @@ function createStreetSpotLight(castShadow) {
     return spotLight;
 }
 
+/* create the lights that aren't not saw - ie we don't need the model */
 function createHiddenLights() {
     const hiddenLight1 = createStreetSpotLight(false);
     hiddenLight1.position.set(7, 4, 3);
