@@ -2,7 +2,7 @@ var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, 0.1, 2000 ); // Perspective projection parameters
 camera.position.x = 0;
-camera.position.y = 0.55;
+camera.position.y = 0.5;
 camera.position.z = 0.1;
 
 var renderer = new THREE.WebGLRenderer();
@@ -19,6 +19,7 @@ orbitControls.enableDamping = true;
 orbitControls.dampingFactor = 0.25;
 orbitControls.screenSpacePanning = false;
 orbitControls.position0.clientY = 1;
+orbitControls.target.set(0.1, 0.5, 0.1);
 
 controls = orbitControls;
 
